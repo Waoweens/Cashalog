@@ -10,23 +10,33 @@ class AppRoot extends StatefulWidget {
 
 class _AppRootState extends State<AppRoot> {
   String title = 'Cashalog';
+  int currentPageIndex = 0;
 
-  void updateTitle(String newTitle) {
-    setState(() {
-      title = newTitle;
-    });
-  }
+  final List<Widget> _pages = [
+    const HomePage(), // Home
+    const Placeholder(), // History
+    const Placeholder(), // You
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(title),
-      ),
-      body: const Center(
-        child: HomePage(),
-      ),
-    );
+        bottomNavigationBar: NavigationBar(
+          selectedIndex: currentPageIndex,
+          onDestinationSelected: (int index) {
+            setState(() {
+              currentPageIndex = index;
+            });
+          },
+          destinations: const <Widget>[
+            NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
+            NavigationDestination(icon: Icon(Icons.article), label: 'History'),
+            NavigationDestination(icon: Icon(Icons.person), label: 'You'),
+          ],
+        ),
+        body: IndexedStack(
+          index: currentPageIndex,
+          children: _pages,
+        ));
   }
 }
