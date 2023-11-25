@@ -1,3 +1,4 @@
+import 'package:cashalog/app/transaction.dart';
 import 'package:cashalog/components/balance_card.dart';
 import 'package:flutter/material.dart';
 
@@ -14,20 +15,23 @@ class _HomePageState extends State<HomePage> {
   void deposit() {
     debugPrint('Deposit');
     setState(() {
-      balance++;
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const TransactionPage()));
     });
   }
 
   void withdraw() {
     debugPrint('Withdraw');
     setState(() {
-      balance--;
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const TransactionPage()));
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return SafeArea(
+        child: Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,6 +47,6 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-    );
+    ));
   }
 }
