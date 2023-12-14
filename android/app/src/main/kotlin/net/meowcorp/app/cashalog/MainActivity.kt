@@ -1,4 +1,4 @@
-package com.example.cashalog
+package net.meowcorp.app.cashalog
 
 import io.flutter.embedding.android.FlutterActivity
 
