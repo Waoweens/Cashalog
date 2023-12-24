@@ -3,6 +3,7 @@ import 'package:cashalog/components/balance_card.dart';
 import 'package:cashalog/db/db.dart';
 import 'package:cashalog/db/history.dart';
 import 'package:cashalog/utils/currency.dart';
+import 'package:cashalog/utils/platform.dart';
 import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
 
@@ -88,6 +89,7 @@ class _HomePageState extends State<HomePage> {
               onRefresh: _refresh,
               child: ListView(
                 children: <Widget>[
+                  nonTouchRefreshButton(_refresh),
                   const Text(
                     'Welcome back',
                     style:
