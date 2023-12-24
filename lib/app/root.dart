@@ -1,3 +1,4 @@
+import 'package:cashalog/app/history.dart';
 import 'package:cashalog/app/home.dart';
 import 'package:flutter/material.dart';
 
@@ -9,18 +10,18 @@ class AppRoot extends StatefulWidget {
 }
 
 class _AppRootState extends State<AppRoot> {
-  String title = 'Cashalog';
   int currentPageIndex = 0;
 
-  final List<Widget> _pages = [
-    const HomePage(), // Home
-    const Placeholder(), // History
-    const Placeholder(), // You
+  final List<PageData> _pages = [
+    const PageData(page: HomePage(), title: 'Cashalog'),
+    const PageData(page: HistoryPage(), title: 'History'),
+    const PageData(page: Placeholder(), title: 'You'),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(title: Text(_pages[currentPageIndex].title)),
         bottomNavigationBar: NavigationBar(
           selectedIndex: currentPageIndex,
           onDestinationSelected: (int index) {
@@ -36,7 +37,14 @@ class _AppRootState extends State<AppRoot> {
         ),
         body: IndexedStack(
           index: currentPageIndex,
-          children: _pages,
+          children: _pages.map((pageData) => pageData.page).toList(),
         ));
   }
+}
+
+class PageData {
+  final String title;
+  final Widget page;
+
+  const PageData({required this.title, required this.page});
 }
