@@ -11,6 +11,8 @@ String formatCurrency(int amount) {
   return idrFormat.format(amount);
 }
 
+enum TransactionType { deposit, withdraw }
+
 class CurrencyInputFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
