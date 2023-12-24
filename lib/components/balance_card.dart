@@ -18,10 +18,15 @@ class BalanceCard extends StatefulWidget {
 }
 
 class _BalanceCardState extends State<BalanceCard> {
+  int get balance => widget.balance;
   String get formattedBalance => formatCurrency(widget.balance);
 
   @override
   Widget build(BuildContext context) {
+    Color balanceColor = balance.isNegative
+        ? Theme.of(context).colorScheme.error
+        : Theme.of(context).textTheme.bodyLarge!.color!;
+
     return Row(
       children: [
         Expanded(
@@ -34,8 +39,10 @@ class _BalanceCardState extends State<BalanceCard> {
                   const Text('Your balance'),
                   Text(
                     formattedBalance,
-                    style: const TextStyle(
-                        fontSize: 24.0, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: 24.0,
+                        fontWeight: FontWeight.bold,
+                        color: balanceColor),
                   ),
                   Padding(
                       padding: const EdgeInsets.only(top: 8.0),
